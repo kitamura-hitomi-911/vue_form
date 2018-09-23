@@ -13,6 +13,7 @@
 		<vmFormInput v-bind="form.inputpassword" @update-value="updateValue"></vmFormInput>
 		<vmFormInput v-bind="form.inputcheckbox" @update-value="updateValue"></vmFormInput>
 		<vmFormInput v-bind="form.inputradio" @update-value="updateValue"></vmFormInput>
+		<vmFormInput v-bind="form.select" @update-value="updateValue"></vmFormInput>
 		<a href="#" @click.prevent="onSubmit">送信</a>
 	</div>
 </template>
@@ -69,7 +70,23 @@
 						value:'fuga',
 						required:true,
 						err:''
-					}
+					},
+					select:{
+						name:'select',
+						type:'select',
+						list:[
+							{value:'',label:'↓選択してください'},
+							{value:'hoge1',label:'ほげ1'},
+							{value:'fuga1',label:'ふが1'},
+							{value:'hoge2',label:'ほげ2'},
+							{value:'fuga2',label:'ふが2'},
+							{value:'hoge3',label:'ほげ3'},
+							{value:'fuga3',label:'ふが4'},
+						],
+						value:'hoge1',
+						required:true,
+						err:''
+					},
 				}
 			}
 		},
