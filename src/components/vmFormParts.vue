@@ -7,6 +7,7 @@
 			<select :name="name" v-if="type=='select'" @change="onChange">
 				<option v-for="item in list" :value="item.value" :selected="value==item.value || Array.isArray(value) && value.indexOf(item.value) >= 0">{{item.label}}</option>
 			</select>
+			<textarea :name="name" :placeholder="placeholder" v-if="type=='textarea'" @input="onInput">{{value}}</textarea>
 		</div>
 		<p class="formparts-err" v-if="err">{{err}}</p>
 	</div>
@@ -14,7 +15,7 @@
 </template>
 <script>
 	export default {
-		name:'vmFormInput',
+		name:'vmFormParts',
 		props:{
 			name:{
 				type:String,

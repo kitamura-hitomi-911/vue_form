@@ -8,18 +8,19 @@
 			</p>
 		</div>
 		<vmForm></vmForm>
-		<vmFormInput v-bind="form.inputtext" @update-value="updateValue"></vmFormInput>
-		<vmFormInput v-bind="form.inputnumber" @update-value="updateValue"></vmFormInput>
-		<vmFormInput v-bind="form.inputpassword" @update-value="updateValue"></vmFormInput>
-		<vmFormInput v-bind="form.inputcheckbox" @update-value="updateValue"></vmFormInput>
-		<vmFormInput v-bind="form.inputradio" @update-value="updateValue"></vmFormInput>
-		<vmFormInput v-bind="form.select" @update-value="updateValue"></vmFormInput>
+		<vmFormParts v-bind="form.inputtext" @update-value="updateValue"></vmFormParts>
+		<vmFormParts v-bind="form.inputnumber" @update-value="updateValue"></vmFormParts>
+		<vmFormParts v-bind="form.inputpassword" @update-value="updateValue"></vmFormParts>
+		<vmFormParts v-bind="form.inputcheckbox" @update-value="updateValue"></vmFormParts>
+		<vmFormParts v-bind="form.inputradio" @update-value="updateValue"></vmFormParts>
+		<vmFormParts v-bind="form.select" @update-value="updateValue"></vmFormParts>
+		<vmFormParts v-bind="form.textarea" @update-value="updateValue"></vmFormParts>
 		<a href="#" @click.prevent="onSubmit">送信</a>
 	</div>
 </template>
 <script>
 	import vmForm from './components/vmForm.vue';
-	import vmFormInput from './components/vmFormInput.vue';
+	import vmFormParts from './components/vmFormParts.vue';
 
 	export default {
 		name: 'app',
@@ -81,18 +82,26 @@
 							{value:'hoge2',label:'ほげ2'},
 							{value:'fuga2',label:'ふが2'},
 							{value:'hoge3',label:'ほげ3'},
-							{value:'fuga3',label:'ふが4'},
+							{value:'fuga3',label:'ふが3'},
 						],
 						value:'hoge1',
 						required:true,
 						err:''
 					},
+					textarea:{
+						name:'textarea',
+						type:'textarea',
+						value:'',
+						placeholder:'入力してください',
+						required:true,
+						err:''
+					}
 				}
 			}
 		},
 		components:{
 			vmForm,
-			vmFormInput
+			vmFormParts
 		},
 		methods:{
 			updateValue(name,value,is_checked){
