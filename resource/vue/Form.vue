@@ -21,111 +21,9 @@
     import FormInputCheckbox from '@/vue/components/FormInputCheckbox';
     import FormInputSelect from '@/vue/components/FormInputSelect';
 
-    const form_data = [
-        {
-            label: 'カテゴリ1',
-            id:'cat1',
-            items:[
-                {
-                    label:'1行テキスト',
-                    name:'hoge1',
-                    type:'text',
-                    value:'',
-                    placeholder:'入力してください',
-                    is_requied:true
-                }
-            ],
-            err_msgs:[],
-        },
-        {
-            label: 'カテゴリ2',
-            id:'cat2',
-            items:[
-                {
-                    label:'ラジオボタン',
-                    name:'hoge2',
-                    type:'radio',
-                    value:'',
-                    list:[
-                        {
-                            label:'候補1',
-                            value:'radio1',
-                        },
-                        {
-                            label:'候補2',
-                            value:'radio2',
-                        },
-                        {
-                            label:'候補3',
-                            value:'radio3',
-                        }
-                    ],
-                    is_requied:true
-                }
-            ],
-            err_msgs:[],
-        },
-        {
-            label: 'カテゴリ3',
-            id:'cat3',
-            items:[
-                {
-                    label:'チェックボックス',
-                    name:'hoge3',
-                    type:'checkbox',
-                    value:[],
-                    list:[
-                        {
-                            label:'候補1',
-                            value:'checkbox1',
-                        },
-                        {
-                            label:'候補2',
-                            value:'checkbox2',
-                        },
-                        {
-                            label:'候補3',
-                            value:'checkbox3',
-                        }
-                    ],
-                    is_requied:true
-                }
-            ],
-            err_msgs:[],
-        },
-        {
-            label: 'カテゴリ4',
-            id:'cat4',
-            items:[
-                {
-                    label:'プルダウン',
-                    name:'hoge4',
-                    type:'select',
-                    value:'',
-                    list:[
-                        {
-                            label:'選択してください',
-                            value:'',
-                        },
-                        {
-                            label:'候補1',
-                            value:'select1',
-                        },
-                        {
-                            label:'候補2',
-                            value:'select2',
-                        },
-                        {
-                            label:'候補3',
-                            value:'select3',
-                        }
-                    ],
-                    is_requied:true
-                }
-            ],
-            err_msgs:[],
-        }
-    ];
+    import form_data from '@/js/form_data';
+    import formatFormUnitData from '@/js/formatFormUnitData';
+
     export default {
         data:function(){
             return {
@@ -144,16 +42,8 @@
         },
         created:function(){
             form_data.forEach(data=>{
-                data.items.forEach(item => {
-                    const component_name_rules = {
-                        text:'FormInputText',
-                        radio:'FormInputRadio',
-                        checkbox:'FormInputCheckbox',
-                        select:'FormInputSelect'
-                    };
-                    item.component_name = component_name_rules[item.type];
-                });
-                this.unit_list.push(data);
+                const formated_form_unit_data = formatFormUnitData(data);
+                formated_form_unit_data && this.unit_list.push(formated_form_unit_data);
             });
 
         },
@@ -171,9 +61,6 @@
                     Array.isArray(update_obj.value) && update_obj.value.forEach(update_value => {
                         this.item_by_name[update_obj.name].value.push(update_value);
                     });
-
-
-
 
                 }else{
                     this.item_by_name[update_obj.name].value = update_obj.value;
