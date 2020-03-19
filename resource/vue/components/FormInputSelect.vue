@@ -1,10 +1,11 @@
 <template>
     <div class="form-item">
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
-        <div class="form-radios">
-            <label :for="item.name+'_'+radio.value" v-for="radio in item.list">
-                <input type="radio" :name="item.name" v-model="value" :value="radio.value" :id="item.name+'_'+radio.value"><span></span>{{radio.label}}
-            </label>
+        <div class="form-select">
+            <p class="form-select-label">{{lebel_selected}}</p>
+            <select name="item.name" v-model="value">
+                <option :value="option.value" v-for="option in item.list" :key="option.value">{{option.label}}</option>
+            </select>
         </div>
     </div>
 </template>
@@ -29,12 +30,17 @@
                         value:val
                     });
                 }
+            },
+            lebel_selected(){
+                return this.item.list.reduce((acc,option)=> {
+                    return option.value == this.item.value ? option.label : acc;
+                },'');
             }
         },
         created:function(){
             // console.log(this.item);
         },
-        name: 'FormInputRadio'
+        name: 'FormInputSelect'
     };
 </script>
 

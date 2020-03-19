@@ -1,9 +1,9 @@
 <template>
     <div class="form-item">
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
-        <div class="form-radios">
-            <label :for="item.name+'_'+radio.value" v-for="radio in item.list">
-                <input type="radio" :name="item.name" v-model="value" :value="radio.value" :id="item.name+'_'+radio.value"><span></span>{{radio.label}}
+        <div class="form-checkboxes">
+            <label :for="item.name+'_'+checkbox.value" v-for="checkbox in item.list">
+                <input type="checkbox" :name="item.name" v-model="value" :value="checkbox.value" :id="item.name+'_'+checkbox.value"><span></span>{{checkbox.label}}
             </label>
         </div>
     </div>
@@ -34,7 +34,7 @@
         created:function(){
             // console.log(this.item);
         },
-        name: 'FormInputRadio'
+        name: 'FormInputCheckbox'
     };
 </script>
 

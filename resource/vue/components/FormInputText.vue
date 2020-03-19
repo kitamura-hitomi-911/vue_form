@@ -1,7 +1,9 @@
 <template>
     <div class="form-item">
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
-        <input type="text" :name="item.name" v-model="value" :placeholder="item.placeholder">
+        <div class="form-text">
+            <input type="text" :name="item.name" v-model="value" :placeholder="item.placeholder">
+        </div>
     </div>
 </template>
 
