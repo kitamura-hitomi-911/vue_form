@@ -12,6 +12,8 @@ const setting_by_type = {
             optional:[
                 {label:''},
                 {placeholder:''},
+                {maxlength:null},
+                {minlength:null},
                 {disabled:false},
                 {is_requied:false}
             ]
@@ -74,8 +76,10 @@ const setting_by_type = {
             required:['name','type','value'],
             optional:[
                 {label:''},
-                {disabled:false},
                 {placeholder:''},
+                {maxlength:null},
+                {minlength:null},
+                {disabled:false},
                 {is_requied:false}
             ]
         }

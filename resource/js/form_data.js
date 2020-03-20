@@ -9,6 +9,7 @@ export default [
                 type:'text',
                 value:'',
                 placeholder:'入力してください',
+                maxlength:80,
                 is_requied:true
             }
         ]
