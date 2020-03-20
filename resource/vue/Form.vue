@@ -12,7 +12,9 @@
                     </dl>
                 </li>
             </ul>
-            <p class="btn btn-submit"><a href="#" @click.prevent="onClickSubmit">送信</a></p>
+            <div class="form-btn_area">
+                <p class="btn btn-submit"><a href="#" @click.prevent="onClickSubmit">送信</a></p>
+            </div>
         </form>
     </div>
 </template>

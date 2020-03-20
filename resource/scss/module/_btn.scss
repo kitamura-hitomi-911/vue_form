@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.btn{
+	display:inline-block;
+	min-width:100px;
+
+	a{
+		display: block;
+		padding:5px 10px;
+		text-align:center;
+		background-color:#fff;
+		color:#000;
+
+		&:hover{
+			background-color:#ffff99;
+		}
+	}
+}
+
+@media screen and (min-width:768px) {
+	.btn{
+	}
+}
