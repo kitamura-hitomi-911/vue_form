@@ -14,7 +14,17 @@
 	dl{
 
 		dt{
+			padding:10px 0;
+			border-bottom:3px solid #ccc;
+		}
+		dd{
+			padding:10px 0;
+		}
+	}
 
+	.form-item{
+		+.form-item{
+			margin-top:10px;
 		}
 	}
 
@@ -182,9 +192,12 @@
 
 			dt{
 				flex:0 0 10em;
+				border-right:3px solid #ccc;
+				border-bottom:none;
 			}
 			dd{
 				flex: 1 0 auto;
+				padding-left:20px;
 			}
 		}
 	}
