@@ -79,7 +79,46 @@
 
             },
             onClickSubmit(){
-                document.frm.submit();
+                // 入力内容チェック
+                let err_flg = this.unit_list.reduce((err_flg, unit) => {
+                    return unit.items.reduce((err_flg, item) => {
+                        // 初期化
+                        let item_err_flg = false;
+                        item.err_msgs.splice(0);
+
+                        // 未入力チェック
+                        if(item.is_requied){
+                            if(Array.isArray(item.value)){
+                                if(!item.value.length){
+                                    item_err_flg = true;
+                                    item.err_msgs.push('選択必須です');
+                                }
+                            }else if(!item.value){
+                                item_err_flg = true;
+                                item.err_msgs.push('入力必須です');
+                            }
+                        }
+
+                        // min max チェック
+                        if(!item_err_flg && !Array.isArray(item.value) && item.value !== '' && item.min !== void 0 && item.max !== void 0){
+                            if(item.min !== null && item.value < item.min){
+                                item_err_flg = true;
+                                item.err_msgs.push(item.min + 'より大きな値を指定してください');
+                            }
+                            if(item.max !== null && item.value > item.max){
+                                item_err_flg = true;
+                                item.err_msgs.push(item.max + 'より小さな値を指定してください');
+                            }
+                        }
+
+                        console.log(item.label,item_err_flg,err_flg);
+                        return item_err_flg || err_flg;
+                    }, err_flg) || err_flg;
+                },false);
+                if(!err_flg){
+                    // document.frm.submit();
+                }
+
             }
         },
         name: 'Form'

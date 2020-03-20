@@ -10,8 +10,7 @@ export default [
                 value:'',
                 placeholder:'入力してください',
                 maxlength:80,
-                is_requied:true,
-                err_msgs:['hoge']
+                is_requied:true
             }
         ]
     },
@@ -72,7 +71,8 @@ export default [
                 name:'hoge5',
                 type:'textarea',
                 value:'',
-                placeholder:'入力してください\nよろしく'
+                placeholder:'入力してください\nよろしく',
+                is_requied:true
             }
         ]
     },
@@ -102,25 +102,31 @@ export default [
                         label:'候補3',
                         value:'select3',
                     }
-                ]
+                ],
+                is_requied:true
             },
             {
                 label:'Number',
                 name:'hoge6',
                 type:'number',
-                value:''
+                value:'',
+                is_requied:true
             },
             {
                 label:'日付',
                 name:'hoge7',
                 type:'date',
-                value:''
+                value:'',
+                is_requied:true
             },
             {
                 label:'時間',
                 name:'hoge8',
                 type:'time',
-                value:''
+                value:'',
+                min:'08:00',
+                max:'21:00',
+                is_requied:true
             }
         ]
     }
