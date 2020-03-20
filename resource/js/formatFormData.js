@@ -135,6 +135,15 @@ const setting_by_type = {
 
 };
 
+const default_err_msg_txt = {
+    empty_input:'入力必須です',
+    empty_select:'選択必須です',
+    min:'__MIN__以上の値を指定してください',
+    max:'__MAX__以下の値を指定してください',
+    minlength:'__MINLENGTH__文字以上入力してください',
+    maxlength:'__MAXLENGTH__文字以下で入力してください'
+};
+
 export default data => {
     // unit の必須プロパティの不足チェック
     if(unit_props.required.some(prop=> data[prop] === void 0)){
@@ -168,6 +177,9 @@ export default data => {
 
         // item の component_name をセット
         item.component_name = setting_by_type[item.type].component_name;
+
+        // item の err_msg_set をセット
+        item.err_msg_txt = Object.assign({}, default_err_msg_txt, item.err_msg_txt || {});
 
         // item.list のプロパティのチェック
         const _item_list_props = setting_by_type[item.type].item_list_props || '';

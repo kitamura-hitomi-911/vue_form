@@ -83,36 +83,42 @@
                 let err_flg = this.unit_list.reduce((err_flg, unit) => {
                     return unit.items.reduce((err_flg, item) => {
                         // 初期化
-                        let item_err_flg = false;
                         item.err_msgs.splice(0);
 
                         // 未入力チェック
                         if(item.is_requied){
                             if(Array.isArray(item.value)){
                                 if(!item.value.length){
-                                    item_err_flg = true;
-                                    item.err_msgs.push('選択必須です');
+                                    item.err_msgs.push(item.err_msg_txt.empty_select);
                                 }
                             }else if(!item.value){
-                                item_err_flg = true;
-                                item.err_msgs.push('入力必須です');
+                                item.err_msgs.push(item.err_msg_txt.empty_input);
                             }
                         }
 
                         // min max チェック
-                        if(!item_err_flg && !Array.isArray(item.value) && item.value !== '' && item.min !== void 0 && item.max !== void 0){
+                        if(!item.err_msgs.length && !Array.isArray(item.value) && item.value !== '' && item.min !== void 0 && item.max !== void 0){
                             if(item.min !== null && item.value < item.min){
-                                item_err_flg = true;
-                                item.err_msgs.push(item.min + 'より大きな値を指定してください');
+                                item.err_msgs.push(item.err_msg_txt.min.replace(/__MIN__/g,item.min));
                             }
                             if(item.max !== null && item.value > item.max){
-                                item_err_flg = true;
-                                item.err_msgs.push(item.max + 'より小さな値を指定してください');
+                                item.err_msgs.push(item.err_msg_txt.max.replace(/__MAX__/g,item.max));
                             }
                         }
 
-                        console.log(item.label,item_err_flg,err_flg);
-                        return item_err_flg || err_flg;
+                        // minlength maxlength チェック
+                        if(!item.err_msgs.length && !Array.isArray(item.value) && item.value !== '' && item.minlength !== void 0 && item.maxlength !== void 0){
+                            if(item.minlength !== null && item.value.length < item.minlength){
+                                item.err_msgs.push(item.err_msg_txt.minlength.replace(/__MINLENGTH__/g,item.minlength));
+                            }
+                            if(item.maxlength !== null && item.value.length > item.maxlength){
+                                item.err_msgs.push(item.err_msg_txt.maxlength.replace(/__MAXLENGTH__/g,item.maxlength));
+                            }
+                        }
+
+                        console.log(item.label,item.err_msgs.length,err_flg);
+                        // item.err_msgs.length があればエラーあり
+                        return !!item.err_msgs.length || err_flg;
                     }, err_flg) || err_flg;
                 },false);
                 if(!err_flg){

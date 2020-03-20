@@ -9,7 +9,8 @@ export default [
                 type:'text',
                 value:'',
                 placeholder:'入力してください',
-                maxlength:80,
+                minlength:2,
+                maxlength:8,
                 is_requied:true
             }
         ]
@@ -117,7 +118,12 @@ export default [
                 name:'hoge7',
                 type:'date',
                 value:'',
-                is_requied:true
+                min:'2020-03-21',
+                is_requied:true,
+                err_msg_txt:{
+                    min:'__MIN__以降の日程を指定してください',
+                    max:'__MAX__以前の日程を指定してください'
+                }
             },
             {
                 label:'時間',
@@ -126,7 +132,11 @@ export default [
                 value:'',
                 min:'08:00',
                 max:'21:00',
-                is_requied:true
+                is_requied:true,
+                err_msg_txt:{
+                    min:'__MIN__以降の時間を指定してください',
+                    max:'__MAX__以前の時間を指定してください'
+                }
             }
         ]
     }
