@@ -1,8 +1,6 @@
 const unit_props = {
     required:['label','id','items'],
-    optional:[
-        {err_msgs:[]}
-    ]
+    optional:[]
 };
 const setting_by_type = {
     text:{
@@ -15,7 +13,8 @@ const setting_by_type = {
                 {maxlength:null},
                 {minlength:null},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         }
     },
@@ -29,7 +28,8 @@ const setting_by_type = {
                 {min:null},
                 {step:null},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         }
     },
@@ -43,7 +43,8 @@ const setting_by_type = {
                 {min:null},
                 {step:null},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         }
     },
@@ -57,7 +58,8 @@ const setting_by_type = {
                 {min:null},
                 {step:null},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         }
     },
@@ -68,7 +70,8 @@ const setting_by_type = {
             optional:[
                 {label:''},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         },
         item_list_props:{
@@ -85,7 +88,8 @@ const setting_by_type = {
             optional:[
                 {label:''},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         },
         item_list_props:{
@@ -102,7 +106,8 @@ const setting_by_type = {
             optional:[
                 {label:''},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         },
         item_list_props:{
@@ -122,7 +127,8 @@ const setting_by_type = {
                 {maxlength:null},
                 {minlength:null},
                 {disabled:false},
-                {is_requied:false}
+                {is_requied:false},
+                {err_msgs:[]}
             ]
         }
     }

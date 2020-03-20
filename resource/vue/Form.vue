@@ -7,7 +7,6 @@
                         <dt>{{unit.label}}</dt>
                         <dd>
                             <component v-for="item in unit.items" :key="item.name" :is="item.component_name" :item="item" @update="update"></component>
-                            <p class="form-err" v-if="unit.err_msgs"></p>
                         </dd>
                     </dl>
                 </li>
