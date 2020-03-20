@@ -10,7 +10,8 @@ export default [
                 value:'',
                 placeholder:'入力してください',
                 maxlength:80,
-                is_requied:true
+                is_requied:true,
+                err_msgs:['hoge']
             }
         ]
     },

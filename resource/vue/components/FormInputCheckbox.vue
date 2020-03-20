@@ -6,34 +6,15 @@
                 <input type="checkbox" :name="item.name" v-model="value" :value="checkbox.value" :id="item.name+'_'+checkbox.value" :disabled="item.disabled || checkbox.disabled"><span></span>{{checkbox.label}}
             </label>
         </div>
+        <p class="form-err" v-if="err_msg" v-html="err_msg"></p>
     </div>
 </template>
 
 <script>
+    import FormItemMixin from '@/vue/components/FormItemMixin';
+
     export default {
-        props:{
-            item:{
-                type:Object,
-                required:true
-            }
-        },
-        computed:{
-            value:{
-                get(){
-                    return this.item.value;
-                },
-                set(val){
-                    console.log(val);
-                    this.$emit('update',{
-                        name:this.item.name,
-                        value:val
-                    });
-                }
-            }
-        },
-        created:function(){
-            // console.log(this.item);
-        },
+        mixins:[FormItemMixin],
         name: 'FormInputCheckbox'
     };
 </script>

@@ -7,38 +7,21 @@
                 <option :value="option.value" v-for="option in item.list" :key="option.value" :disabled="option.disabled">{{option.label}}</option>
             </select>
         </div>
+        <p class="form-err" v-if="err_msg" v-html="err_msg"></p>
     </div>
 </template>
 
 <script>
+    import FormItemMixin from '@/vue/components/FormItemMixin';
+
     export default {
-        props:{
-            item:{
-                type:Object,
-                required:true
-            }
-        },
+        mixins:[FormItemMixin],
         computed:{
-            value:{
-                get(){
-                    return this.item.value;
-                },
-                set(val){
-                    console.log(val);
-                    this.$emit('update',{
-                        name:this.item.name,
-                        value:val
-                    });
-                }
-            },
             lebel_selected(){
                 return this.item.list.reduce((acc,option)=> {
                     return option.value == this.item.value ? option.label : acc;
                 },'');
             }
-        },
-        created:function(){
-            // console.log(this.item);
         },
         name: 'FormInputSelect'
     };

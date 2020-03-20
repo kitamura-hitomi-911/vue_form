@@ -4,33 +4,15 @@
         <div class="form-date">
             <input type="date" :name="item.name" v-model="value" :placeholder="item.placeholder" :max="item.max" :min="item.min" :step="item.step" :disabled="item.disabled">
         </div>
+        <p class="form-err" v-if="err_msg" v-html="err_msg"></p>
     </div>
 </template>
 
 <script>
+    import FormItemMixin from '@/vue/components/FormItemMixin';
+
     export default {
-        props:{
-            item:{
-                type:Object,
-                required:true
-            }
-        },
-        computed:{
-            value:{
-                get(){
-                    return this.item.value;
-                },
-                set(val){
-                    this.$emit('update',{
-                        name:this.item.name,
-                        value:val
-                    });
-                }
-            }
-        },
-        created:function(){
-            // console.log(this.item);
-        },
+        mixins:[FormItemMixin],
         name: 'FormInputDate'
     };
 </script>
