@@ -102,6 +102,24 @@ export default [
                         value:'select3',
                     }
                 ]
+            },
+            {
+                label:'Number',
+                name:'hoge6',
+                type:'number',
+                value:''
+            },
+            {
+                label:'日付',
+                name:'hoge7',
+                type:'date',
+                value:''
+            },
+            {
+                label:'時間',
+                name:'hoge8',
+                type:'time',
+                value:''
             }
         ]
     }

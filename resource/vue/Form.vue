@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <form action="">
+        <form action="./" method="get" name="frm">
             <ul>
                 <li v-for="unit in unit_list" :key="unit.id">
                     <dl>
@@ -11,12 +11,16 @@
                     </dl>
                 </li>
             </ul>
+            <p class="btn btn-submit"><a href="#" @click.prevent="onClickSubmit">送信</a></p>
         </form>
     </div>
 </template>
 
 <script>
     import FormInputText from '@/vue/components/FormInputText';
+    import FormInputNumber from '@/vue/components/FormInputNumber';
+    import FormInputDate from '@/vue/components/FormInputDate';
+    import FormInputTime from '@/vue/components/FormInputTime';
     import FormInputRadio from '@/vue/components/FormInputRadio';
     import FormInputCheckbox from '@/vue/components/FormInputCheckbox';
     import FormSelect from '@/vue/components/FormSelect';
@@ -50,6 +54,9 @@
         },
         components:{
             FormInputText,
+            FormInputNumber,
+            FormInputDate,
+            FormInputTime,
             FormInputRadio,
             FormInputCheckbox,
             FormSelect,
@@ -68,6 +75,10 @@
                     this.item_by_name[update_obj.name].value = update_obj.value;
                 }
 
+            },
+            onClickSubmit(){
+                console.log(document.frm);
+                document.frm.submit();
             }
         },
         name: 'Form'

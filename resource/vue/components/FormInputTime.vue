@@ -1,11 +1,8 @@
 <template>
     <div class="form-item">
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
-        <div class="form-select">
-            <p class="form-select-label">{{lebel_selected}}</p>
-            <select :name="item.name" v-model="value" :disabled="item.disabled">
-                <option :value="option.value" v-for="option in item.list" :key="option.value" :disabled="option.disabled">{{option.label}}</option>
-            </select>
+        <div class="form-time">
+            <input type="time" :name="item.name" v-model="value" :placeholder="item.placeholder" :max="item.max" :min="item.min" :step="item.step" :disabled="item.disabled">
         </div>
     </div>
 </template>
@@ -24,23 +21,17 @@
                     return this.item.value;
                 },
                 set(val){
-                    console.log(val);
                     this.$emit('update',{
                         name:this.item.name,
                         value:val
                     });
                 }
-            },
-            lebel_selected(){
-                return this.item.list.reduce((acc,option)=> {
-                    return option.value == this.item.value ? option.label : acc;
-                },'');
             }
         },
         created:function(){
             // console.log(this.item);
         },
-        name: 'FormInputSelect'
+        name: 'FormInputTime'
     };
 </script>
 

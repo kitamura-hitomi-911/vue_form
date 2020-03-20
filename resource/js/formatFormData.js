@@ -19,6 +19,48 @@ const setting_by_type = {
             ]
         }
     },
+    number:{
+        component_name:'FormInputNumber',
+        item_props:{
+            required:['name','type','value'],
+            optional:[
+                {label:''},
+                {max:null},
+                {min:null},
+                {step:null},
+                {disabled:false},
+                {is_requied:false}
+            ]
+        }
+    },
+    date:{
+        component_name:'FormInputDate',
+        item_props:{
+            required:['name','type','value'],
+            optional:[
+                {label:''},
+                {max:null},
+                {min:null},
+                {step:null},
+                {disabled:false},
+                {is_requied:false}
+            ]
+        }
+    },
+    time:{
+        component_name:'FormInputTime',
+        item_props:{
+            required:['name','type','value'],
+            optional:[
+                {label:''},
+                {max:null},
+                {min:null},
+                {step:null},
+                {disabled:false},
+                {is_requied:false}
+            ]
+        }
+    },
     radio: {
         component_name: 'FormInputRadio',
         item_props:{
