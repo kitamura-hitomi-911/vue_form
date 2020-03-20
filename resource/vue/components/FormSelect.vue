@@ -3,8 +3,8 @@
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
         <div class="form-select">
             <p class="form-select-label">{{lebel_selected}}</p>
-            <select name="item.name" v-model="value">
-                <option :value="option.value" v-for="option in item.list" :key="option.value">{{option.label}}</option>
+            <select name="item.name" v-model="value" :disabled="item.disabled">
+                <option :value="option.value" v-for="option in item.list" :key="option.value" :disabled="option.disabled">{{option.label}}</option>
             </select>
         </div>
     </div>

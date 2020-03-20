@@ -2,7 +2,7 @@
     <div class="form-item">
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
         <div class="form-text">
-            <input type="text" :name="item.name" v-model="value" :placeholder="item.placeholder">
+            <input type="text" :name="item.name" v-model="value" :placeholder="item.placeholder":disabled="item.disabled">
         </div>
     </div>
 </template>

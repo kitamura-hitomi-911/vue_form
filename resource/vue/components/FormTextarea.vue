@@ -2,7 +2,7 @@
     <div class="form-item">
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
         <div class="form-textarea">
-            <textarea :name="item.name" v-model="value" :placeholder="item.placeholder"></textarea>
+            <textarea :name="item.name" v-model="value" :placeholder="item.placeholder" :disabled="item.disabled"></textarea>
         </div>
     </div>
 </template>

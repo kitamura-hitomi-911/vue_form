@@ -3,7 +3,7 @@
         <p class="form-item-ttl" v-if="item.label">{{item.label}}</p>
         <div class="form-checkboxes">
             <label :for="item.name+'_'+checkbox.value" v-for="checkbox in item.list">
-                <input type="checkbox" :name="item.name" v-model="value" :value="checkbox.value" :id="item.name+'_'+checkbox.value"><span></span>{{checkbox.label}}
+                <input type="checkbox" :name="item.name" v-model="value" :value="checkbox.value" :id="item.name+'_'+checkbox.value" :disabled="item.disabled || checkbox.disabled"><span></span>{{checkbox.label}}
             </label>
         </div>
     </div>
