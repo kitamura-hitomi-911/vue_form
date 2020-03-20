@@ -19,10 +19,11 @@
     import FormInputText from '@/vue/components/FormInputText';
     import FormInputRadio from '@/vue/components/FormInputRadio';
     import FormInputCheckbox from '@/vue/components/FormInputCheckbox';
-    import FormInputSelect from '@/vue/components/FormInputSelect';
+    import FormSelect from '@/vue/components/FormSelect';
+    import FormTextarea from '@/vue/components/FormTextarea';
 
     import form_data from '@/js/form_data';
-    import formatFormUnitData from '@/js/formatFormUnitData';
+    import formatFormData from '@/js/formatFormData';
 
     export default {
         data:function(){
@@ -42,7 +43,7 @@
         },
         created:function(){
             form_data.forEach(data=>{
-                const formated_form_unit_data = formatFormUnitData(data);
+                const formated_form_unit_data = formatFormData(data);
                 formated_form_unit_data && this.unit_list.push(formated_form_unit_data);
             });
 
@@ -51,7 +52,8 @@
             FormInputText,
             FormInputRadio,
             FormInputCheckbox,
-            FormInputSelect
+            FormSelect,
+            FormTextarea
         },
         methods:{
             update(update_obj){

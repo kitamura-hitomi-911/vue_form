@@ -40,7 +40,7 @@ const setting_by_type = {
         }
     },
     select: {
-        component_name: 'FormInputSelect',
+        component_name: 'FormSelect',
         item_props:{
             required:['name','type','list'],
             optional:[
@@ -49,8 +49,20 @@ const setting_by_type = {
                 {is_requied:false}
             ]
         }
-
+    },
+    textarea: {
+        component_name: 'FormTextarea',
+        item_props:{
+            required:['name','type'],
+            optional:[
+                {label:''},
+                {value:''},
+                {placeholder:''},
+                {is_requied:false}
+            ]
+        }
     }
+
 };
 
 export default data => {

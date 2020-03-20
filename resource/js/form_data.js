@@ -64,6 +64,13 @@ export default [
                     }
                 ],
                 is_requied:true
+            },
+            {
+                label:'テキストエリア',
+                name:'hoge5',
+                type:'textarea',
+                value:'',
+                placeholder:'入力してください\nよろしく'
             }
         ]
     },
