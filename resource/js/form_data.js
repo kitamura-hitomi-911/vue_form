@@ -73,8 +73,17 @@ export default [
                 type:'textarea',
                 value:'',
                 placeholder:'候補2を選択した場合は詳細を記入。\nよろしく',
-                disabled:true,
-                is_requied:true
+                is_requied:true,
+                observe:[
+                    {
+                        name:'hoge3',
+                        changeCallback(observed_item){
+                            // this が observer の この item 自身。またここはアロー関数では動作しない
+                            this.disabled = !(observed_item.value.includes('checkbox2'));
+                        },
+                        init:true
+                    }
+                ]
             }
         ]
     },

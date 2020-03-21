@@ -37,6 +37,7 @@
         data:function(){
             return {
                 unit_list:[],
+                observed_item:{}
             }
         },
         computed:{
@@ -50,11 +51,32 @@
             }
         },
         created:function(){
+            // unit_list をセット
             form_data.forEach(data=>{
                 const formated_form_unit_data = formatFormData(data);
                 formated_form_unit_data && this.unit_list.push(formated_form_unit_data);
             });
 
+            // ovserved_item をセット
+            this.unit_list.forEach(unit => {
+                unit.items.forEach(item => {
+                    item.observe !== void 0 && Array.isArray(item.observe) && item.observe.forEach(observe_setting => {
+                        console.log(observe_setting);
+                        if (!this.observed_item[observe_setting.name]) {
+                            this.observed_item[observe_setting.name] = [];
+                        }
+                        this.observed_item[observe_setting.name].push({
+                            _this:item,
+                            callback:observe_setting.changeCallback,
+                        });
+                        // 初期処理が true だったら処理
+                        if(observe_setting.init){
+                            observe_setting.changeCallback.call(item, this.item_by_name[observe_setting.name]);
+                        }
+
+                    });
+                });
+            });
         },
         components:{
             FormInputText,
@@ -70,7 +92,7 @@
             update(update_obj){
                 if(Array.isArray(this.item_by_name[update_obj.name].value)){
                     // 配列の場合は1回リセットして入れなおす
-                    this.item_by_name[update_obj.name].value.splice();
+                    this.item_by_name[update_obj.name].value.splice(0);
                     Array.isArray(update_obj.value) && update_obj.value.forEach(update_value => {
                         this.item_by_name[update_obj.name].value.push(update_value);
                     });
@@ -79,6 +101,10 @@
                     this.item_by_name[update_obj.name].value = update_obj.value;
                 }
 
+                // ovserved_item があれば処理
+                this.observed_item[update_obj.name] && this.observed_item[update_obj.name].forEach( observer =>{
+                    observer.callback.call(observer._this,update_obj);
+                });
             },
             // 未入力チェック
             _checkEmpty(item){
@@ -106,7 +132,7 @@
                 }
             },
             //minlength maxlength チェック
-            _checkMinlengthMaxlength(){
+            _checkMinlengthMaxlength(item){
                 if(!Array.isArray(item.value) && item.value !== '' && item.minlength !== void 0 && item.maxlength !== void 0){
                     if(item.minlength !== null && item.value.length < item.minlength){
                         item.err_msgs.push(item.err_msg_txt.minlength.replace(/__MINLENGTH__/g,item.minlength));
