@@ -109,7 +109,7 @@
             // 未入力チェック
             _checkEmpty(item){
                 if(item.is_requied){
-                    if(Array.isArray(item.value)){
+                    if(Array.isArray(item.value) || item.type==='select'){
                         if(!item.value.length){
                             item.err_msgs.push(item.err_msg_txt.empty_select);
                         }

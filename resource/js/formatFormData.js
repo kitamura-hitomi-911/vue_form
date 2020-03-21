@@ -172,7 +172,7 @@ export default data => {
         _item_props.optional.forEach(prop_default => {
             Object.keys(prop_default).forEach(key => {
                 if(item[key] === void 0){
-                    item[key] = prop_default[key];
+                    item[key] = Array.isArray(prop_default[key])?[]:prop_default[key];
                 }
             });
         });
@@ -194,7 +194,7 @@ export default data => {
             _item_list_props.optional.forEach(prop_default => {
                 Object.keys(prop_default).forEach(key => {
                     if(list_item[key] === void 0){
-                        list_item[key] = prop_default[key];
+                        list_item[key] = Array.isArray(prop_default[key])?[]:prop_default[key];
                     }
                 });
             });

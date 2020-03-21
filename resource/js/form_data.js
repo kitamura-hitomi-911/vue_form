@@ -27,9 +27,12 @@ export default [
                 name:'hoge10',
                 type:'text',
                 value:'',
-                placeholder:'入力してください',
+                placeholder:'00-0000-0000',
                 pattern:'^\\d{2,4}-\\d{3,4}-\\d{3,4}$',
-                is_requied:true
+                is_requied:true,
+                err_msg_txt:{
+                    pattern:'00-0000-0000のフォーマットで入力してください'
+                }
             }
 
         ]
