@@ -72,7 +72,8 @@ export default [
                 name:'hoge5',
                 type:'textarea',
                 value:'',
-                placeholder:'入力してください\nよろしく',
+                placeholder:'候補2を選択した場合は詳細を記入。\nよろしく',
+                disabled:true,
                 is_requied:true
             }
         ]
@@ -111,6 +112,8 @@ export default [
                 name:'hoge6',
                 type:'number',
                 value:'',
+                min:3,
+                max:10,
                 is_requied:true
             },
             {
@@ -118,7 +121,8 @@ export default [
                 name:'hoge7',
                 type:'date',
                 value:'',
-                min:'2020-03-21',
+                min:'2020-03-22',
+                max:'2021-03-21',
                 is_requied:true,
                 err_msg_txt:{
                     min:'__MIN__以降の日程を指定してください',

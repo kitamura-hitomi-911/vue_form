@@ -28,6 +28,8 @@
     import FormSelect from '@/vue/components/FormSelect';
     import FormTextarea from '@/vue/components/FormTextarea';
 
+    import * as Utils from '@/js/utils';
+
     import form_data from '@/js/form_data';
     import formatFormData from '@/js/formatFormData';
 
@@ -78,6 +80,42 @@
                 }
 
             },
+            // 未入力チェック
+            _checkEmpty(item){
+                if(item.is_requied){
+                    if(Array.isArray(item.value)){
+                        if(!item.value.length){
+                            item.err_msgs.push(item.err_msg_txt.empty_select);
+                        }
+                    }else if(!item.value){
+                        item.err_msgs.push(item.err_msg_txt.empty_input);
+                    }
+                }
+            },
+            // min max チェック
+            _checkMinMax(item){
+                if(!Array.isArray(item.value) && item.value !== '' && item.min !== void 0 && item.max !== void 0){
+                    if(item.min !== null && item.value < item.min){
+                        let replace_str = item.type === 'date' ? Utils.formatDate(item.min,'YYYY/MM/DD') : item.min;
+                        item.err_msgs.push(item.err_msg_txt.min.replace(/__MIN__/g,replace_str));
+                    }
+                    if(item.max !== null && item.value > item.max){
+                        let replace_str = item.type === 'date' ? Utils.formatDate(item.max,'YYYY/MM/DD') : item.max;
+                        item.err_msgs.push(item.err_msg_txt.max.replace(/__MAX__/g,replace_str));
+                    }
+                }
+            },
+            //minlength maxlength チェック
+            _checkMinlengthMaxlength(){
+                if(!Array.isArray(item.value) && item.value !== '' && item.minlength !== void 0 && item.maxlength !== void 0){
+                    if(item.minlength !== null && item.value.length < item.minlength){
+                        item.err_msgs.push(item.err_msg_txt.minlength.replace(/__MINLENGTH__/g,item.minlength));
+                    }
+                    if(item.maxlength !== null && item.value.length > item.maxlength){
+                        item.err_msgs.push(item.err_msg_txt.maxlength.replace(/__MAXLENGTH__/g,item.maxlength));
+                    }
+                }
+            },
             onClickSubmit(){
                 // 入力内容チェック
                 let err_flg = this.unit_list.reduce((err_flg, unit) => {
@@ -85,35 +123,17 @@
                         // 初期化
                         item.err_msgs.splice(0);
 
-                        // 未入力チェック
-                        if(item.is_requied){
-                            if(Array.isArray(item.value)){
-                                if(!item.value.length){
-                                    item.err_msgs.push(item.err_msg_txt.empty_select);
-                                }
-                            }else if(!item.value){
-                                item.err_msgs.push(item.err_msg_txt.empty_input);
-                            }
-                        }
+                        if(!item.disabled){
 
-                        // min max チェック
-                        if(!item.err_msgs.length && !Array.isArray(item.value) && item.value !== '' && item.min !== void 0 && item.max !== void 0){
-                            if(item.min !== null && item.value < item.min){
-                                item.err_msgs.push(item.err_msg_txt.min.replace(/__MIN__/g,item.min));
-                            }
-                            if(item.max !== null && item.value > item.max){
-                                item.err_msgs.push(item.err_msg_txt.max.replace(/__MAX__/g,item.max));
-                            }
-                        }
+                            // 未入力チェック
+                            this._checkEmpty(item);
 
-                        // minlength maxlength チェック
-                        if(!item.err_msgs.length && !Array.isArray(item.value) && item.value !== '' && item.minlength !== void 0 && item.maxlength !== void 0){
-                            if(item.minlength !== null && item.value.length < item.minlength){
-                                item.err_msgs.push(item.err_msg_txt.minlength.replace(/__MINLENGTH__/g,item.minlength));
-                            }
-                            if(item.maxlength !== null && item.value.length > item.maxlength){
-                                item.err_msgs.push(item.err_msg_txt.maxlength.replace(/__MAXLENGTH__/g,item.maxlength));
-                            }
+                            // min max チェック
+                            !item.err_msgs.length && this._checkMinMax(item);
+
+                            // minlength maxlength チェック
+                            !item.err_msgs.length && this._checkMinlengthMaxlength(item);
+
                         }
 
                         console.log(item.label,item.err_msgs.length,err_flg);
@@ -132,9 +152,5 @@
 </script>
 
 <style lang="scss">
-    li{
-        &+li{
-            margin-top:10px;
-        }
-    }
+
 </style>
