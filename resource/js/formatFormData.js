@@ -12,6 +12,7 @@ const setting_by_type = {
                 {placeholder:''},
                 {maxlength:null},
                 {minlength:null},
+                {pattern:null},
                 {disabled:false},
                 {is_requied:false},
                 {err_msgs:[]}
@@ -141,7 +142,8 @@ const default_err_msg_txt = {
     min:'__MIN__以上の値を指定してください',
     max:'__MAX__以下の値を指定してください',
     minlength:'__MINLENGTH__文字以上入力してください',
-    maxlength:'__MAXLENGTH__文字以下で入力してください'
+    maxlength:'__MAXLENGTH__文字以下で入力してください',
+    pattern:'不正なフォーマットです'
 };
 
 export default data => {

@@ -12,7 +12,26 @@ export default [
                 minlength:2,
                 maxlength:8,
                 is_requied:true
+            },
+            {
+                label:'メールアドレス',
+                name:'hoge9',
+                type:'text',
+                value:'',
+                placeholder:'入力してください',
+                pattern:'^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$',
+                is_requied:true
+            },
+            {
+                label:'電話番号',
+                name:'hoge10',
+                type:'text',
+                value:'',
+                placeholder:'入力してください',
+                pattern:'^\\d{2,4}-\\d{3,4}-\\d{3,4}$',
+                is_requied:true
             }
+
         ]
     },
     {

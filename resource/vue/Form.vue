@@ -142,6 +142,16 @@
                     }
                 }
             },
+            // pattern チェック
+            _checkPattern(item){
+                if(!Array.isArray(item.value) && item.value !== '' && item.pattern !== void 0 && item.pattern){
+                    let reg = new RegExp(item.pattern);
+                    if(!item.value.match(reg)){
+                        item.err_msgs.push(item.err_msg_txt.pattern);
+                    }
+                }
+
+            },
             onClickSubmit(){
                 // 入力内容チェック
                 let err_flg = this.unit_list.reduce((err_flg, unit) => {
@@ -159,6 +169,9 @@
 
                             // minlength maxlength チェック
                             !item.err_msgs.length && this._checkMinlengthMaxlength(item);
+
+                            // pattern チェック
+                            !item.err_msgs.length && this._checkPattern(item);
 
                         }
 
