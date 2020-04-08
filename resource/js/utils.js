@@ -11,7 +11,7 @@ export function formatDate (date, format) {
         date = new Date(date);
     }
     if(!format) format = window.date_format ? window.date_format : 'YYYY年MM月DD日(WD)';
-    var weekdaylist = ["日", "月", "火", "水", "木", "金", "土"];
+    const weekdaylist = ["日", "月", "火", "水", "木", "金", "土"];
     format = format.replace(/YYYY/g, date.getFullYear());
     format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
     format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
@@ -25,8 +25,8 @@ export function formatDate (date, format) {
     format = format.replace(/_m_/g, date.getMinutes());
     format = format.replace(/_s_/g, date.getSeconds());
     if(format.match(/_S_/g)){
-        var milliSeconds = ('00' + date.getMilliseconds()).slice(-3);
-        var length = format.match(/S/g).length;
+        const milliSeconds = ('00' + date.getMilliseconds()).slice(-3);
+        const length = format.match(/S/g).length;
         for(var i = 0; i < length; i++) format = format.replace(/S/, milliSeconds.substring(i, i + 1));
     }
     return format;
