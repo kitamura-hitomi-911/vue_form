@@ -168,32 +168,35 @@
             },
             onClickSubmit(){
                 // 入力内容チェック
-                let err_flg = this.unit_list.reduce((err_flg, unit) => {
-                    return unit.items.reduce((err_flg, item) => {
-                        // 初期化
-                        item.err_msgs.splice(0);
+                this.unit_groups.reduce((group_err_flg, group) => {
+                    return group.units.reduce((err_flg, unit) => {
+                        return unit.items.reduce((err_flg, item) => {
+                            // 初期化
+                            item.err_msgs.splice(0);
 
-                        if(!item.disabled){
+                            if(!item.disabled){
 
-                            // 未入力チェック
-                            this._checkEmpty(item);
+                                // 未入力チェック
+                                this._checkEmpty(item);
 
-                            // min max チェック
-                            !item.err_msgs.length && this._checkMinMax(item);
+                                // min max チェック
+                                !item.err_msgs.length && this._checkMinMax(item);
 
-                            // minlength maxlength チェック
-                            !item.err_msgs.length && this._checkMinlengthMaxlength(item);
+                                // minlength maxlength チェック
+                                !item.err_msgs.length && this._checkMinlengthMaxlength(item);
 
-                            // pattern チェック
-                            !item.err_msgs.length && this._checkPattern(item);
+                                // pattern チェック
+                                !item.err_msgs.length && this._checkPattern(item);
 
-                        }
+                            }
 
-                        console.log(item.label,item.err_msgs.length,err_flg);
-                        // item.err_msgs.length があればエラーあり
-                        return !!item.err_msgs.length || err_flg;
-                    }, err_flg) || err_flg;
+                            console.log(item.label,item.err_msgs.length,err_flg);
+                            // item.err_msgs.length があればエラーあり
+                            return !!item.err_msgs.length || err_flg;
+                        }, err_flg) || err_flg;
+                    },group_err_flg);
                 },false);
+
                 if(!err_flg){
                     // document.frm.submit();
                 }
