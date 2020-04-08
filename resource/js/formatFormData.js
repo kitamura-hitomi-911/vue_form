@@ -202,5 +202,11 @@ export default data => {
 
 
     });
+
+    // unit 算出するプロパティ追加
+    data.is_requied = data.items.some(item => {
+        return item.is_requied;
+    });
+
     return data;
 };

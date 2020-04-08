@@ -1,21 +1,22 @@
 <template>
-    <div class="form">
-        <form action="./" method="get" name="frm">
-            <ul>
-                <li v-for="unit in unit_list" :key="unit.id">
-                    <dl>
+    <form action="./" method="get" name="frm">
+        <section class="form" v-for="unit_group in unit_groups" :key="unit_group.group_label">
+            <h1>{{unit_group.group_label}}</h1>
+            <div class="form-grp">
+                <template v-for="unit in unit_group.units">
+                    <dl :class="{'is-required': unit.is_requied}" :key="unit.id">
                         <dt>{{unit.label}}</dt>
                         <dd>
                             <component v-for="item in unit.items" :key="item.name" :is="item.component_name" :item="item" @update="update"></component>
                         </dd>
                     </dl>
-                </li>
-            </ul>
-            <div class="form-btn_area">
-                <p class="btn btn-submit"><a href="#" @click.prevent="onClickSubmit">送信</a></p>
+                </template>
             </div>
-        </form>
-    </div>
+        </section>
+        <div class="form-btn_area">
+            <p class="btn btn-submit"><a href="#" @click.prevent="onClickSubmit">送信</a></p>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -36,47 +37,60 @@
     export default {
         data:function(){
             return {
-                unit_list:[],
+                unit_groups:[],
                 observed_item:{}
             }
         },
         computed:{
             item_by_name(){
-                return this.unit_list.reduce((acc,unit) => {
-                    unit.items.forEach(item => {
-                       acc[item.name] = item;
-                    });
-                    return acc;
+                return this.unit_groups.reduce((ret_obj, group) =>{
+                    return group.units.reduce((acc,unit) => {
+                        unit.items.forEach(item => {
+                            acc[item.name] = item;
+                        });
+                        return acc;
+                    },ret_obj);
                 },{});
             }
         },
         created:function(){
             // unit_list をセット
             form_data.forEach(data=>{
-                const formated_form_unit_data = formatFormData(data);
-                formated_form_unit_data && this.unit_list.push(formated_form_unit_data);
+                let _unit_group = {
+                    group_label:data.group_label,
+                    units:[]
+                };
+                data.units.forEach(unit=>{
+                    const formated_form_unit_data = formatFormData(unit);
+                    formated_form_unit_data && _unit_group.units.push(formated_form_unit_data);
+                });
+                _unit_group.units.length && this.unit_groups.push(_unit_group);
+
             });
 
             // ovserved_item をセット
-            this.unit_list.forEach(unit => {
-                unit.items.forEach(item => {
-                    item.observe !== void 0 && Array.isArray(item.observe) && item.observe.forEach(observe_setting => {
-                        console.log(observe_setting);
-                        if (!this.observed_item[observe_setting.name]) {
-                            this.observed_item[observe_setting.name] = [];
-                        }
-                        this.observed_item[observe_setting.name].push({
-                            _this:item,
-                            callback:observe_setting.changeCallback,
-                        });
-                        // 初期処理が true だったら処理
-                        if(observe_setting.init){
-                            observe_setting.changeCallback.call(item, this.item_by_name[observe_setting.name]);
-                        }
+            this.unit_groups.forEach(group => {
+                group.units.forEach(unit => {
+                    unit.items.forEach(item => {
+                        item.observe !== void 0 && Array.isArray(item.observe) && item.observe.forEach(observe_setting => {
+                            console.log(observe_setting);
+                            if (!this.observed_item[observe_setting.name]) {
+                                this.observed_item[observe_setting.name] = [];
+                            }
+                            this.observed_item[observe_setting.name].push({
+                                _this:item,
+                                callback:observe_setting.changeCallback,
+                            });
+                            // 初期処理が true だったら処理
+                            if(observe_setting.init){
+                                observe_setting.changeCallback.call(item, this.item_by_name[observe_setting.name]);
+                            }
 
+                        });
                     });
                 });
             });
+
         },
         components:{
             FormInputText,
